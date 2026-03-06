@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# process files, skip hidden ones
+for file in * .*; do
+    [[ "$file" == .* ]] && continue
+    [[ -f "$file" ]] || continue
+    echo "Processing: $file"
+done
