@@ -18,7 +18,7 @@ A personal collection of labs, projects, scripts, and experiments used for learn
 | [`greeter`](./greeter) | Greeting service demonstrating Docker environment variables | Bash, Docker |
 | [`health`](./health) | Container health check configuration example | Docker, Nginx |
 | [`joke-dashboard`](./joke-dashboard) | Auto-refreshing dad joke dashboard using a public API | Bash, Docker Compose, Nginx |
-| [`k8s`](./k8s) | Kubernetes manifests for a multi-component chat application | Kubernetes |
+| [`k8s`](./k8s) | Kubernetes manifests for a multi-component chat application, practiced with Minikube | Kubernetes, Minikube |
 | [`myapp`](./myapp) | Minimal containerized application for testing | Bash, Docker |
 | [`status`](./status) | Static status page generator using a multi-stage Docker build | Bash, Docker, Nginx |
 | [`status-page`](./status-page) | Enhanced status page with styling, health checks, and OCI labels | Bash, Docker, Nginx |
