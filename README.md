@@ -19,6 +19,7 @@ A personal collection of labs, projects, scripts, and experiments used for learn
 | [`health`](./health) | Container health check configuration example | Docker, Nginx |
 | [`joke-dashboard`](./joke-dashboard) | Auto-refreshing dad joke dashboard using a public API | Bash, Docker Compose, Nginx |
 | [`k8s`](./k8s) | Kubernetes manifests for a multi-component chat application, practiced with Minikube | Kubernetes, Minikube |
+| [`megacorp`](./megacorp) | Boot.dev Git 2 coursework — sample company data used for branching, merge conflicts, reverts, and stash practice | Git, Bash, CSV |
 | [`myapp`](./myapp) | Minimal containerized application for testing | Bash, Docker |
 | [`status`](./status) | Static status page generator using a multi-stage Docker build | Bash, Docker, Nginx |
 | [`status-page`](./status-page) | Enhanced status page with styling, health checks, and OCI labels | Bash, Docker, Nginx |
@@ -35,4 +36,5 @@ A personal collection of labs, projects, scripts, and experiments used for learn
 - **Load balancing** — reverse proxy and round-robin configuration with Caddy
 - **Kubernetes** — deployments, services, configmaps, persistent volumes, ingress, horizontal pod autoscaling
 - **Go & Python** — small application examples with containerization
+- **Git** — branching, merge conflict resolution, rebasing, reverts, stashing, history rewriting
 - **Data formats** — Markdown, CSV, YAML
