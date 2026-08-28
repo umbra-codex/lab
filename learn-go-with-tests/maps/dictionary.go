@@ -1,4 +1,4 @@
-package main
+package maps
 
 type DictionaryErr string
 
