@@ -1,4 +1,4 @@
-package main
+package slices
 
 func SumAllTails(numbersToSum ...[]int) []int {
 	var sums []int
