@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func startRepl(config *Config) {
 	reader := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -21,9 +21,9 @@ func startRepl() {
 
 		commandName := words[0]
 
-		command, ok := getCommands()[commandName]
+		command, ok := config.Commands[commandName]
 		if ok {
-			err := command.Callback()
+			err := command.Callback(config)
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
 			}
