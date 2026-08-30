@@ -1,0 +1,11 @@
+bootdev-pokedex/repl.log
+
+# Compiled binaries
+bootdev-learn-http-servers-in-go/out
+bootdev-pokedex/pokedex
+docker-goserver/goserver
+go-custom-package/datetest/datetest
+go-custom-package/hellogo/hellogo
+
+# Editor swap files
+status-page/.Dockerfile.swp
