@@ -8,7 +8,11 @@ import (
 type Command struct {
 	Name        string
 	Description string
-	Callback    func() error
+	Callback    func(*Config) error
+}
+
+type Config struct {
+	Commands map[string]Command
 }
 
 func getCommands() map[string]Command {
@@ -26,20 +30,20 @@ func getCommands() map[string]Command {
 	}
 }
 
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
+func commandHelp(config *Config) error {
 	fmt.Println()
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()
-	for _, command := range getCommands() {
+	for _, command := range config.Commands {
 		fmt.Printf("%s: %s\n", command.Name, command.Description)
 	}
 	fmt.Println()
+	return nil
+}
+
+func commandExit(config *Config) error {
+	fmt.Println("Closing the Pokedex... Goodbye!")
+	os.Exit(0)
 	return nil
 }
