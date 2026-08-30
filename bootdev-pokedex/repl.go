@@ -19,7 +19,19 @@ func startRepl() {
 			continue
 		}
 
-		fmt.Printf("Your command was: %s\n", words[0])
+		commandName := words[0]
+
+		command, ok := getCommands()[commandName]
+		if ok {
+			err := command.Callback()
+			if err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
+			continue
+		} else {
+			fmt.Println("Unknown Command")
+			continue
+		}
 	}
 }
 
