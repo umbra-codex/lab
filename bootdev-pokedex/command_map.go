@@ -6,39 +6,37 @@ import (
 )
 
 func commandMapNext(config *Config) error {
-	locationResp, err := config.PokeapiClient.ListLocations(config.NextLocationURL)
+	response, err := config.pokeapiClient.ListLocations(config.nextLocationURL)
 	if err != nil {
 		return err
 	}
 
-	for _, location := range locationResp.Results {
+	for _, location := range response.Results {
 		fmt.Println(location.Name)
 	}
-	fmt.Println()
 
-	config.NextLocationURL = locationResp.Next
-	config.PreviousLocationURL = locationResp.Previous
+	config.nextLocationURL = response.Next
+	config.previousLocationURL = response.Previous
 
 	return nil
 }
 
 func commandMapPrevious(config *Config) error {
-	if config.PreviousLocationURL == nil {
-		return errors.New("you're on the first page\n")
+	if config.previousLocationURL == nil {
+		return errors.New("you're on the first page")
 	}
 
-	locationResp, err := config.PokeapiClient.ListLocations(config.PreviousLocationURL)
+	response, err := config.pokeapiClient.ListLocations(config.previousLocationURL)
 	if err != nil {
 		return err
 	}
 
-	for _, location := range locationResp.Results {
+	for _, location := range response.Results {
 		fmt.Println(location.Name)
 	}
-	fmt.Println()
 
-	config.NextLocationURL = locationResp.Next
-	config.PreviousLocationURL = locationResp.Previous
+	config.nextLocationURL = response.Next
+	config.previousLocationURL = response.Previous
 
 	return nil
 }

@@ -10,10 +10,10 @@ import (
 )
 
 type Config struct {
-	Commands            map[string]Command
-	PokeapiClient       pokeapi.Client
-	NextLocationURL     *string
-	PreviousLocationURL *string
+	commands            map[string]Command
+	pokeapiClient       pokeapi.Client
+	nextLocationURL     *string
+	previousLocationURL *string
 }
 
 func startRepl(config *Config) {
@@ -30,17 +30,17 @@ func startRepl(config *Config) {
 
 		commandName := words[0]
 
-		command, ok := config.Commands[commandName]
+		command, ok := config.commands[commandName]
 		if ok {
-			err := command.Callback(config)
+			err := command.callback(config)
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
 			}
-			continue
 		} else {
-			fmt.Println("Unknown Command\n")
-			continue
+			fmt.Println("Unknown Command")
 		}
+		fmt.Println()
+		continue
 	}
 }
 
@@ -51,32 +51,32 @@ func cleanInput(text string) []string {
 }
 
 type Command struct {
-	Name        string
-	Description string
-	Callback    func(*Config) error
+	name        string
+	description string
+	callback    func(*Config) error
 }
 
 func GetCommands() map[string]Command {
 	return map[string]Command{
 		"help": {
-			Name:        "help",
-			Description: "Displays a help message",
-			Callback:    commandHelp,
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
 		},
 		"map": {
-			Name:        "map",
-			Description: "Get the next page of locations",
-			Callback:    commandMapNext,
+			name:        "map",
+			description: "Get the next page of locations",
+			callback:    commandMapNext,
 		},
 		"mapb": {
-			Name:        "mapb",
-			Description: "Get the previous page of locations",
-			Callback:    commandMapPrevious,
+			name:        "mapb",
+			description: "Get the previous page of locations",
+			callback:    commandMapPrevious,
 		},
 		"exit": {
-			Name:        "exit",
-			Description: "Exit the Pokedex",
-			Callback:    commandExit,
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
 		},
 	}
 }
