@@ -5,38 +5,38 @@ import (
 	"fmt"
 )
 
-func commandMapNext(config *Config) error {
-	response, err := config.pokeapiClient.ListLocations(config.nextLocationURL)
+func commandMapNext(config *Config, _ ...string) error {
+	listLocations, err := config.pokeapiClient.ListLocations(config.nextLocationURL)
 	if err != nil {
 		return err
 	}
 
-	for _, location := range response.Results {
+	for _, location := range listLocations.Results {
 		fmt.Println(location.Name)
 	}
 
-	config.nextLocationURL = response.Next
-	config.previousLocationURL = response.Previous
+	config.nextLocationURL = listLocations.Next
+	config.previousLocationURL = listLocations.Previous
 
 	return nil
 }
 
-func commandMapPrevious(config *Config) error {
+func commandMapPrevious(config *Config, _ ...string) error {
 	if config.previousLocationURL == nil {
 		return errors.New("you're on the first page")
 	}
 
-	response, err := config.pokeapiClient.ListLocations(config.previousLocationURL)
+	listLocations, err := config.pokeapiClient.ListLocations(config.previousLocationURL)
 	if err != nil {
 		return err
 	}
 
-	for _, location := range response.Results {
+	for _, location := range listLocations.Results {
 		fmt.Println(location.Name)
 	}
 
-	config.nextLocationURL = response.Next
-	config.previousLocationURL = response.Previous
+	config.nextLocationURL = listLocations.Next
+	config.previousLocationURL = listLocations.Previous
 
 	return nil
 }
