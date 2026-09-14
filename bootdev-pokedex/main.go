@@ -11,6 +11,7 @@ func main() {
 	config := &Config{
 		commands:      GetCommands(),
 		pokeapiClient: pokeClient,
+		caughtPokemon: map[string]pokeapi.Pokemon{},
 	}
 	startRepl(config)
 }
