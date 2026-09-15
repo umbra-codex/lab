@@ -10,7 +10,6 @@ import (
 )
 
 type Config struct {
-	commands            map[string]Command
 	pokeapiClient       pokeapi.Client
 	nextLocationURL     *string
 	previousLocationURL *string
@@ -35,7 +34,7 @@ func startRepl(config *Config) {
 			args = words[1:]
 		}
 
-		command, ok := config.commands[commandName]
+		command, ok := getCommands()[commandName]
 		if ok {
 			err := command.callback(config, args...)
 			if err != nil {
@@ -61,7 +60,7 @@ type Command struct {
 	callback    func(*Config, ...string) error
 }
 
-func GetCommands() map[string]Command {
+func getCommands() map[string]Command {
 	return map[string]Command{
 		"catch": {
 			name:        "catch <pokemon_name>",
@@ -72,6 +71,11 @@ func GetCommands() map[string]Command {
 			name:        "explore <location_name>",
 			description: "Explore a location",
 			callback:    commandExplore,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
 		},
 		"help": {
 			name:        "help",
@@ -93,10 +97,10 @@ func GetCommands() map[string]Command {
 			description: "Get the previous page of locations",
 			callback:    commandMapPrevious,
 		},
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
+		"pokedex": {
+			name:        "pokedex",
+			description: "see all the pokemon you have caught",
+			callback:    commandPokedex,
 		},
 	}
 }
