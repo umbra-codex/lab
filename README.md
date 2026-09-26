@@ -16,7 +16,9 @@ Boot.dev coursework.
 | [`bootdev-bookbot`](./bootdev-bookbot) | Book text analyzer: word and character frequency | Python |
 | [`bootdev-k8s`](./bootdev-k8s) | Kubernetes course manifests for a three-service crawler app: deployments, autoscalers, and Gateway API routing | Kubernetes |
 | [`bootdev-learn-aws-ch10-ecs`](./bootdev-learn-aws-ch10-ecs) | Python HTTP server that pulls a value from SSM Parameter Store, packaged for ECS | Python, Docker, AWS |
+| [`bootdev-learn-http-servers-in-go`](./bootdev-learn-http-servers-in-go) | Start of the Chirpy HTTP server: serves static files under `/app/` and a `/healthz` readiness endpoint | Go |
 | [`bootdev-megacorp`](./bootdev-megacorp) | Git 2 coursework: sample company data for branching, merge conflicts, reverts, and stashes | Git, Bash, CSV |
+| [`bootdev-pokedex`](./bootdev-pokedex) | Pokedex REPL over the PokeAPI: page through locations, explore them, catch and inspect Pokemon, with a TTL response cache | Go |
 | [`bootdev-webflyx`](./bootdev-webflyx) | Sample movie catalog of titles, quotes, and a classics CSV | Markdown, CSV |
 | [`bootdev-worldbanc`](./bootdev-worldbanc) | Terminals and Shells coursework: a mock bank filesystem of public and private trees, dated logs, transaction CSVs, and shell scripts | Bash, Go, CSV |
 | [`docker-bookbot`](./docker-bookbot) | Containerized bookbot with Python built from source | Python, Docker |
@@ -46,7 +48,7 @@ Boot.dev coursework.
 - **Kubernetes**: deployments, services, configmaps, persistent volumes, horizontal pod autoscaling, Gateway API routing
 - **Observability**: Grafana and Prometheus on Kubernetes via kube-prometheus-stack
 - **AWS**: SSM Parameter Store, container images for ECS
-- **Go**: local module imports, plus a test-first pass through the language basics
+- **Go**: local module imports, a test-first pass through the language basics, a REPL CLI with an HTTP client and a mutex-guarded cache, and a `net/http` server
 - **Python**: small applications, containerized
 - **Git**: branching, merge conflict resolution, rebasing, reverts, stashing, history rewriting
 - **Data formats**: Markdown, CSV, YAML
