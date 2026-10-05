@@ -2,7 +2,7 @@
 
 Hands-on work from courses, homelab builds, and one-off experiments. Each directory stands alone.
 Where a directory came from a course, its name carries the source as a prefix: `bootdev-` marks
-Boot.dev coursework.
+Boot.dev coursework and `codepath-` marks CodePath coursework.
 
 ---
 
@@ -21,6 +21,7 @@ Boot.dev coursework.
 | [`bootdev-pokedex`](./bootdev-pokedex) | Pokedex REPL over the PokeAPI: page through locations, explore them, catch and inspect Pokemon, with a TTL response cache | Go |
 | [`bootdev-webflyx`](./bootdev-webflyx) | Sample movie catalog of titles, quotes, and a classics CSV | Markdown, CSV |
 | [`bootdev-worldbanc`](./bootdev-worldbanc) | Terminals and Shells coursework: a mock bank filesystem of public and private trees, dated logs, transaction CSVs, and shell scripts | Bash, Go, CSV |
+| [`codepath-ai110-module1`](./codepath-ai110-module1) | AI-assisted debugging exercise on Playlist Chaos, a Streamlit playlist generator: search and playlist fixes plus a readability refactor | Python, Streamlit |
 | [`docker-bookbot`](./docker-bookbot) | Containerized bookbot with Python built from source | Python, Docker |
 | [`docker-goserver`](./docker-goserver) | Prebuilt Go HTTP server binary copied into a slim Debian image, port set by env var | Go, Docker |
 | [`docker-load-balancer`](./docker-load-balancer) | Round-robin load balancer using a Caddy reverse proxy | Caddy, Docker |
