@@ -9,3 +9,10 @@ go-custom-package/hellogo/hellogo
 
 # Editor swap files
 status-page/.Dockerfile.swp
+
+# Python environments and caches
+codepath-ai110-module1/.venv/
+codepath-ai110-module1/__pycache__/
+
+# Local Claude Code settings
+codepath-ai110-module1/.claude/settings.local.json
