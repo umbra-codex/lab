@@ -10,7 +10,7 @@ Boot.dev coursework and `codepath-` marks CodePath coursework.
 
 | Directory | Description | Tech |
 |---|---|---|
-| [`backup`](./backup) | Backup CLI with create, restore, and list operations | Bash, Docker |
+| [`backup`](./backup) | Stub backup CLI whose create, restore, and list commands only print a message, packaged in a Docker image | Bash, Docker |
 | [`bash`](./bash) | Bash scripting examples organized by topic | Bash |
 | [`bash-dotfiles`](./bash-dotfiles) | Shell and editor config files with a setup script | Bash, Starship, Vim |
 | [`bootdev-ai-agent`](./bootdev-ai-agent) | CLI coding agent on the Gemini API: a tool-calling loop that lists, reads, writes and runs files inside a calculator project directory it cannot leave | Python, Gemini API |
@@ -18,6 +18,7 @@ Boot.dev coursework and `codepath-` marks CodePath coursework.
 | [`bootdev-bookbot`](./bootdev-bookbot) | Book text analyzer: word and character frequency | Python |
 | [`bootdev-k8s`](./bootdev-k8s) | Kubernetes course manifests for a three-service crawler app: deployments, autoscalers, and Gateway API routing | Kubernetes |
 | [`bootdev-learn-aws-ch10-ecs`](./bootdev-learn-aws-ch10-ecs) | Python HTTP server that pulls a value from SSM Parameter Store, packaged for ECS | Python, Docker, AWS |
+| [`bootdev-learn-http-protocol-in-go`](./bootdev-learn-http-protocol-in-go) | HTTP built up from raw TCP and UDP: read a file in chunks, split a TCP stream into lines over a channel, send lines over UDP, and parse an HTTP request line incrementally across reads, with tests | Go |
 | [`bootdev-learn-http-servers-in-go`](./bootdev-learn-http-servers-in-go) | Start of the Chirpy HTTP server: serves static files under `/app/` and a `/healthz` readiness endpoint | Go |
 | [`bootdev-megacorp`](./bootdev-megacorp) | Git 2 coursework: sample company data for branching, merge conflicts, reverts, and stashes | Git, Bash, CSV |
 | [`bootdev-pokedex`](./bootdev-pokedex) | Pokedex REPL over the PokeAPI: page through locations, explore them, catch and inspect Pokemon, with a TTL response cache | Go |
@@ -32,7 +33,7 @@ Boot.dev coursework and `codepath-` marks CodePath coursework.
 | [`health`](./health) | Container health check configuration example | Docker, Nginx |
 | [`joke-dashboard`](./joke-dashboard) | Auto-refreshing dad joke dashboard fed by a public API | Bash, Docker Compose, Nginx |
 | [`kubecraft-mealie`](./kubecraft-mealie) | Recipe manager on Kubernetes with its own namespace, PVC, and LoadBalancer service | Kubernetes, Mealie |
-| [`learn-go-with-tests`](./learn-go-with-tests) | Test-first Go exercises: integers, iteration, slices, structs, pointers and errors, maps, dependency injection | Go |
+| [`learn-go-with-tests`](./learn-go-with-tests) | Test-first Go exercises: integers, iteration, arrays and slices, structs and interfaces, pointers and errors, maps, dependency injection, mocking, concurrency, select, reflection, sync, context, Roman numerals, and an SVG clock face | Go |
 | [`monitoring`](./monitoring) | LoadBalancer service exposing Grafana from the kube-prometheus-stack release | Kubernetes, Grafana, Prometheus |
 | [`myapp`](./myapp) | Minimal containerized app for testing | Bash, Docker |
 | [`status`](./status) | Static status page built with a multi-stage Docker build | Bash, Docker, Nginx |
@@ -51,7 +52,8 @@ Boot.dev coursework and `codepath-` marks CodePath coursework.
 - **Kubernetes**: deployments, services, configmaps, persistent volumes, horizontal pod autoscaling, Gateway API routing
 - **Observability**: Grafana and Prometheus on Kubernetes via kube-prometheus-stack
 - **AWS**: SSM Parameter Store, container images for ECS
-- **Go**: local module imports, a test-first pass through the language basics, a REPL CLI with an HTTP client and a mutex-guarded cache, and a `net/http` server
-- **Python**: small applications, containerized
+- **Go**: local module imports, a test-first pass through the language and its concurrency tools, a REPL CLI with an HTTP client and a mutex-guarded cache, a `net/http` server, and TCP, UDP and HTTP request parsing from raw streams
+- **Python**: small applications (containerized or run locally), a Pygame game, and a Streamlit app debugged with AI assistance
+- **AI agents**: a Gemini tool-calling loop that reads, writes and runs files inside a working directory it cannot leave
 - **Git**: branching, merge conflict resolution, rebasing, reverts, stashing, history rewriting
 - **Data formats**: Markdown, CSV, YAML
