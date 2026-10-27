@@ -13,6 +13,8 @@ Boot.dev coursework and `codepath-` marks CodePath coursework.
 | [`backup`](./backup) | Backup CLI with create, restore, and list operations | Bash, Docker |
 | [`bash`](./bash) | Bash scripting examples organized by topic | Bash |
 | [`bash-dotfiles`](./bash-dotfiles) | Shell and editor config files with a setup script | Bash, Starship, Vim |
+| [`bootdev-ai-agent`](./bootdev-ai-agent) | CLI coding agent on the Gemini API: a tool-calling loop that lists, reads, writes and runs files inside a calculator project directory it cannot leave | Python, Gemini API |
+| [`bootdev-asteroids`](./bootdev-asteroids) | Playable Asteroids clone: thrust and rotate the ship, shoot asteroids that split, and the game ends when one hits you | Python, Pygame |
 | [`bootdev-bookbot`](./bootdev-bookbot) | Book text analyzer: word and character frequency | Python |
 | [`bootdev-k8s`](./bootdev-k8s) | Kubernetes course manifests for a three-service crawler app: deployments, autoscalers, and Gateway API routing | Kubernetes |
 | [`bootdev-learn-aws-ch10-ecs`](./bootdev-learn-aws-ch10-ecs) | Python HTTP server that pulls a value from SSM Parameter Store, packaged for ECS | Python, Docker, AWS |
