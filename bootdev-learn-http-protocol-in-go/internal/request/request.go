@@ -6,10 +6,13 @@ import (
 	"fmt"
 	"io"
 	"strings"
+
+	"github.com/umbra-codex/lab/bootdev-learn-http-protocol-in-go/internal/headers"
 )
 
 type Request struct {
 	RequestLine RequestLine
+	Headers     headers.Headers
 	state       parserState
 }
 
@@ -23,6 +26,7 @@ type parserState int
 
 const (
 	stateInitialized parserState = iota
+	stateParsingHeaders
 	stateDone
 )
 
@@ -33,12 +37,25 @@ const (
 
 func RequestFromReader(reader io.Reader) (*Request, error) {
 	request := &Request{
-		state: stateInitialized,
+		state:   stateInitialized,
+		Headers: headers.NewHeaders(),
 	}
 	buffer := make([]byte, bufferSize, bufferSize)
 	readToIndex := 0
 
 	for request.state != stateDone {
+		if readToIndex > 0 {
+			numBytesParsed, err := request.parse(buffer[:readToIndex])
+			if err != nil {
+				return nil, err
+			}
+			copy(buffer, buffer[numBytesParsed:])
+			readToIndex -= numBytesParsed
+			if numBytesParsed > 0 {
+				continue
+			}
+		}
+
 		if readToIndex >= len(buffer) {
 			newBuffer := make([]byte, len(buffer)*2)
 			copy(newBuffer, buffer)
@@ -48,20 +65,14 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 		numBytesRead, err := reader.Read(buffer[readToIndex:])
 		if err != nil {
 			if errors.Is(err, io.EOF) {
-				request.state = stateDone
+				if request.state != stateDone {
+					return nil, fmt.Errorf("unexpected EOF: incomplete request")
+				}
 				break
 			}
 			return nil, err
 		}
 		readToIndex += numBytesRead
-
-		numBytesParsed, err := request.parse(buffer[:readToIndex])
-		if err != nil {
-			return nil, err
-		}
-
-		copy(buffer, buffer[numBytesParsed:])
-		readToIndex -= numBytesParsed
 	}
 
 	return request, nil
@@ -123,15 +134,30 @@ func (r *Request) parse(data []byte) (int, error) {
 		return 0, fmt.Errorf("parse called after request was already done")
 	}
 
-	requestLine, n, err := parseRequestLine(data)
-	if err != nil {
-		return 0, err
-	}
-	if n == 0 {
-		return 0, nil
-	}
+	switch r.state {
+	case stateInitialized:
+		requestLine, n, err := parseRequestLine(data)
+		if err != nil {
+			return 0, err
+		}
+		if n == 0 {
+			return 0, nil
+		}
+		r.RequestLine = *requestLine
+		r.state = stateParsingHeaders
+		return n, nil
 
-	r.RequestLine = *requestLine
-	r.state = stateDone
-	return n, nil
+	case stateParsingHeaders:
+		n, done, err := r.Headers.Parse(data)
+		if err != nil {
+			return 0, err
+		}
+		if done {
+			r.state = stateDone
+		}
+		return n, nil
+
+	default:
+		return 0, fmt.Errorf("unknown parser state: %d", r.state)
+	}
 }
