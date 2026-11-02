@@ -198,6 +198,85 @@ func TestRequestHeadersAnyChunkSize(t *testing.T) {
 	}
 }
 
+func TestRequestBodyParse(t *testing.T) {
+	cases := []struct {
+		name            string
+		data            string
+		numBytesPerRead int
+		body            string
+		wantErr         bool
+	}{
+		{
+			name:            "Standard Body",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: 13\r\n\r\nhello world!\n",
+			numBytesPerRead: 3,
+			body:            "hello world!\n",
+		},
+		{
+			name:            "Empty Body, 0 reported content length",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: 0\r\n\r\n",
+			numBytesPerRead: 3,
+			body:            "",
+		},
+		{
+			name:            "Empty Body, no reported content length",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\n\r\n",
+			numBytesPerRead: 3,
+			body:            "",
+		},
+		{
+			name:            "Body shorter than reported content length",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: 20\r\n\r\npartial content",
+			numBytesPerRead: 3,
+			wantErr:         true,
+		},
+		{
+			name:            "No Content-Length but Body Exists",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\n\r\nsome body bytes",
+			numBytesPerRead: 3,
+			body:            "",
+		},
+		{
+			name:            "Invalid content length",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: abc\r\n\r\n",
+			numBytesPerRead: 3,
+			wantErr:         true,
+		},
+		{
+			name:            "Lowercase content length header",
+			data:            "POST /submit HTTP/1.1\r\nhost: localhost:42069\r\ncontent-length: 5\r\n\r\nhello",
+			numBytesPerRead: 3,
+			body:            "hello",
+		},
+		{
+			name:            "Body longer than reported content length",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: 5\r\n\r\nhello world",
+			numBytesPerRead: 3,
+			wantErr:         true,
+		},
+		{
+			name:            "Standard Body one byte at a time",
+			data:            "POST /submit HTTP/1.1\r\nHost: localhost:42069\r\nContent-Length: 13\r\n\r\nhello world!\n",
+			numBytesPerRead: 1,
+			body:            "hello world!\n",
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			reader := &chunkReader{data: tc.data, numBytesPerRead: tc.numBytesPerRead}
+			r, err := RequestFromReader(reader)
+			if tc.wantErr {
+				require.Error(t, err)
+				return
+			}
+			require.NoError(t, err)
+			require.NotNil(t, r)
+			assert.Equal(t, tc.body, string(r.Body))
+		})
+	}
+}
+
 type chunkReader struct {
 	data            string
 	numBytesPerRead int
